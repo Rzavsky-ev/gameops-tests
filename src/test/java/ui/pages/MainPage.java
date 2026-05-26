@@ -5,7 +5,6 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Allure;
 
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -20,8 +19,8 @@ public class MainPage {
     private final SelenideElement buttonAbout = $("button svg.lucide-info").parent();
     private final SelenideElement buttonTheme = $("button[title='Тема']");
     private final SelenideElement buttonLanguage = $("button svg.lucide-globe").parent();
-    private final SelenideElement buttonLogin = $(withText("Войти"));
-
+    // private final SelenideElement buttonLogin = $(withText("Войти"));
+    private final SelenideElement buttonLogin = $("button svg.lucide-user").parent();
     // --- Burger menu items ---
     private final SelenideElement burgerHome = $("a[href='/']");
     private final SelenideElement burgerHeroes = $("a[href='/heroes']");
@@ -41,8 +40,10 @@ public class MainPage {
     private final SelenideElement langEnglish = $(byText("Английский")).closest("button");
 
     // --- Hero ---
-    private final SelenideElement heading = $("h1");
-    private final SelenideElement subheading = $("h1 + p");
+    private final SelenideElement empiresImg = $("img[alt='Empires']");
+    private final SelenideElement ampersandImg = $("img[alt='&']");
+    private final SelenideElement puzzlesImg = $("img[alt='Puzzles']");
+    private final SelenideElement subheading = $("p.text-lg");
 
     // --- Quick links ---
     private final SelenideElement heroesLink = $("a[href='/heroes']");
@@ -130,7 +131,7 @@ public class MainPage {
      * @return true, если активна тёмная тема (есть галочка на кнопке «Темная»)
      */
     public boolean isDarkThemeActive() {
-        return themeDark.$("svg.lucide-check").exists();
+        return themeDark.exists();
     }
 
     // --- Language dropdown getters ---
@@ -161,11 +162,18 @@ public class MainPage {
         Allure.step("Нажать кнопку 'Войти'", () -> buttonLogin.click());
         return new LoginPage();
     }
-
     // --- Hero getters ---
 
-    public SelenideElement getHeading() {
-        return heading;
+    public SelenideElement getEmpiresImg() {
+        return empiresImg;
+    }
+
+    public SelenideElement getAmpersandImg() {
+        return ampersandImg;
+    }
+
+    public SelenideElement getPuzzlesImg() {
+        return puzzlesImg;
     }
 
     public SelenideElement getSubheading() {

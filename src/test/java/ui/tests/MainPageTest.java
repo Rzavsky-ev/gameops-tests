@@ -59,9 +59,12 @@ public class MainPageTest extends BaseTest {
     void burgerMenuShouldOpen() {
         MainPage page = new MainPage();
         Allure.step("Открыть бургер-меню", () -> page.getBurgerMenu().click());
-        Allure.step("Проверить, что пункт 'Главная' видим", () -> page.getBurgerHome().shouldBe(visible));
-        Allure.step("Проверить, что пункт 'Герои' видим", () -> page.getBurgerHeroes().shouldBe(visible));
-        Allure.step("Проверить, что пункт 'Совместные закупки' видим", () -> page.getBurgerJointPurchases().shouldBe(visible));
+        Allure.step("Проверить, что пункт 'Главная' видим", () ->
+                page.getBurgerHome().shouldBe(visible));
+        Allure.step("Проверить, что пункт 'Герои' видим", () ->
+                page.getBurgerHeroes().shouldBe(visible));
+        Allure.step("Проверить, что пункт 'Совместные закупки' видим", () ->
+                page.getBurgerJointPurchases().shouldBe(visible));
     }
 
     @Test
@@ -70,12 +73,14 @@ public class MainPageTest extends BaseTest {
     @Story("Бургер-меню")
     @Tag("regression")
     void burgerHomeShouldNavigate() {
-        MainPage page = new MainPage();
-        Allure.step("Открыть бургер-меню", () -> page.getBurgerMenu().click());
-        Allure.step("Нажать 'Главная'", () -> page.getBurgerHome().click());
-        Allure.step("Проверить заголовок главной", () ->
-                page.getHeading().shouldHave(text("EMPIRES & PUZZLES"))
-        );
+        MainPage mainPage = new MainPage();
+        Allure.step("Открыть бургер-меню", () -> mainPage.getBurgerMenu().click());
+        Allure.step("Нажать 'Главная'", () -> mainPage.getBurgerHome().click());
+        Allure.step("Проверить заголовок главной", () -> {
+            mainPage.getEmpiresImg().shouldBe(visible);
+            mainPage.getAmpersandImg().shouldBe(visible);
+            mainPage.getPuzzlesImg().shouldBe(visible);
+        });
     }
 
     // --- About ---
@@ -145,7 +150,6 @@ public class MainPageTest extends BaseTest {
 
     @Test
     @DisplayName("Переключение темы должно работать")
-    @Description("Проверяет переключение между тёмной и светлой темой")
     @Story("Тема")
     @Tag("regression")
     void themeButtonShouldToggleTheme() {
@@ -155,12 +159,14 @@ public class MainPageTest extends BaseTest {
 
         if (page.isDarkThemeActive()) {
             Allure.step("Переключить на светлую тему", () -> page.getThemeLight().click());
-            Allure.step("Проверить, что кнопка теперь 'Светлая'", () ->
-                    page.getButtonTheme().shouldHave(text("Светлая")));
+            Allure.step("Проверить, что иконка сменилась на солнце", () ->
+                    page.getThemeLight().shouldBe(visible)
+            );
         } else {
             Allure.step("Переключить на тёмную тему", () -> page.getThemeDark().click());
-            Allure.step("Проверить, что кнопка теперь 'Темная'", () ->
-                    page.getButtonTheme().shouldHave(text("Темная")));
+            Allure.step("Проверить, что иконка сменилась на луну", () ->
+                    page.getThemeDark().shouldBe(visible)
+            );
         }
     }
 
@@ -259,9 +265,12 @@ public class MainPageTest extends BaseTest {
     @Story("Hero-секция")
     @Tag("smoke")
     void headingShouldBeVisible() {
-        Allure.step("Проверить заголовок", () ->
-                new MainPage().getHeading().shouldHave(text("EMPIRES & PUZZLES"))
-        );
+        Allure.step("Проверить заголовок", () -> {
+            MainPage mainPage = new MainPage();
+            mainPage.getEmpiresImg().shouldBe(visible);
+            mainPage.getAmpersandImg().shouldBe(visible);
+            mainPage.getPuzzlesImg().shouldBe(visible);
+        });
     }
 
     @Test

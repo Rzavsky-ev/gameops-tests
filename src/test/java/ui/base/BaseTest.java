@@ -26,7 +26,6 @@ public abstract class BaseTest {
      */
     @BeforeAll
     public static void setUpAll() {
-       // Configuration.browser = "firefox";
         Configuration.browser = "chrome";
         Configuration.baseUrl = "https://gameops-platform.dev";
         Configuration.browserSize = "1920x1200";

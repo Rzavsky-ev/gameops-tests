@@ -104,4 +104,63 @@ public class LoginPageTest extends BaseTest {
                 loginPage.getUsernameInput().shouldHave(attribute("aria-invalid", "true"))
         );
     }
+
+    @Test
+    @DisplayName("Вход с неверным паролем должен показывать ошибку")
+    @Description("Проверяет сообщение об ошибке при неверном пароле")
+    @Story("Авторизация")
+    @Tag("regression")
+    void loginWithInvalidPassword() {
+        LoginPage loginPage = new MainPage().clickLogin();
+        Allure.step("Ввести Email", () ->
+                loginPage.getUsernameInput().setValue("test@example.com")
+        );
+        Allure.step("Ввести неверный пароль", () ->
+                loginPage.getPasswordInput().setValue("WrongPassword123")
+        );
+        Allure.step("Нажать Sign In", () -> loginPage.getSignInButton().click());
+        Allure.step("Проверить сообщение об ошибке", () ->
+                loginPage.getErrorMessage().shouldBe(visible)
+                        .shouldHave(text("Invalid username or password"))
+        );
+    }
+
+    @Test
+    @DisplayName("Вход с несуществующим Email должен показывать ошибку")
+    @Description("Проверяет сообщение об ошибке при несуществующем пользователе")
+    @Story("Авторизация")
+    @Tag("regression")
+    void loginWithNonExistentUser() {
+        LoginPage loginPage = new MainPage().clickLogin();
+        Allure.step("Ввести несуществующий Email", () ->
+                loginPage.getUsernameInput().setValue("no-such-user@test.com")
+        );
+        Allure.step("Ввести пароль", () ->
+                loginPage.getPasswordInput().setValue("SomePassword123")
+        );
+        Allure.step("Нажать Sign In", () -> loginPage.getSignInButton().click());
+        Allure.step("Проверить сообщение об ошибке", () ->
+                loginPage.getErrorMessage().shouldBe(visible)
+                        .shouldHave(text("Invalid username or password"))
+        );
+    }
+
+    @Test
+    @DisplayName("Успешный вход с валидными учётными данными")
+    @Description("Проверяет вход с правильным email и паролем")
+    @Story("Авторизация")
+    @Tag("regression")
+    void loginWithValidCredentials() {
+        LoginPage loginPage = new MainPage().clickLogin();
+        Allure.step("Ввести Email", () ->
+                loginPage.getUsernameInput().setValue("test@example.com")
+        );
+        Allure.step("Ввести пароль", () ->
+                loginPage.getPasswordInput().setValue("GamePlatformTest")
+        );
+        Allure.step("Нажать Sign In", () -> loginPage.getSignInButton().click());
+        Allure.step("Проверить, что вход выполнен (редирект на главную)", () ->
+                new MainPage().getLogo().shouldBe(visible)
+        );
+    }
 }
