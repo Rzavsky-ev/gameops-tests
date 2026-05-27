@@ -12,7 +12,6 @@ import java.nio.file.Paths;
 
 import static com.codeborne.selenide.Selenide.*;
 
-
 /**
  * Базовый класс для всех UI-тестов.
  */
