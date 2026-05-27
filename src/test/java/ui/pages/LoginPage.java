@@ -15,6 +15,7 @@ public class LoginPage {
     private final SelenideElement signInButton = $("#kc-login");
     private final SelenideElement registerLink = $("a[href*='registration']");
     private final SelenideElement forgotPasswordLink = $("a[href*='reset-credentials']");
+    private final SelenideElement errorMessage = $("#input-error");
 
     public SelenideElement getPageTitle() {
         return pageTitle;
@@ -38,5 +39,9 @@ public class LoginPage {
 
     public SelenideElement getForgotPasswordLink() {
         return forgotPasswordLink;
+    }
+
+    public SelenideElement getErrorMessage() {
+        return errorMessage;
     }
 }

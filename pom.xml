@@ -12,7 +12,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <selenide.version>7.7.1</selenide.version>
+        <selenide.version>7.8.0</selenide.version>
         <junit.version>5.11.4</junit.version>
         <assertj-core.version>3.27.7</assertj-core.version>
         <allure.version>2.24.0</allure.version>
