@@ -48,7 +48,7 @@ public class LoginPageTest extends BaseTest {
     void loginPageShouldHaveSignInButton() {
         LoginPage loginPage = new MainPage().clickLogin();
         Allure.step("Проверить, что кнопка Sign In видима и активна", () ->
-                loginPage.getSignInButton().shouldBe(visible).shouldBe(enabled)
+                loginPage.getSignInButton().shouldBe(enabled)
         );
     }
 

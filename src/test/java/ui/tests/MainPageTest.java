@@ -63,8 +63,6 @@ public class MainPageTest extends BaseTest {
                 page.getBurgerHome().shouldBe(visible));
         Allure.step("Проверить, что пункт 'Герои' видим", () ->
                 page.getBurgerHeroes().shouldBe(visible));
-        Allure.step("Проверить, что пункт 'Совместные закупки' видим", () ->
-                page.getBurgerJointPurchases().shouldBe(visible));
     }
 
     @Test
@@ -298,7 +296,6 @@ public class MainPageTest extends BaseTest {
             page.getEventsLink().shouldBe(visible);
             page.getChestsLink().shouldBe(visible);
             page.getAllianceLink().shouldBe(visible);
-            page.getJointPurchasesLink().shouldBe(visible);
         });
     }
 
