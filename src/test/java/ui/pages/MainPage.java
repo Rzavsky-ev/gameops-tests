@@ -19,12 +19,11 @@ public class MainPage {
     private final SelenideElement buttonAbout = $("button svg.lucide-info").parent();
     private final SelenideElement buttonTheme = $("button[title='Тема']");
     private final SelenideElement buttonLanguage = $("button svg.lucide-globe").parent();
-    // private final SelenideElement buttonLogin = $(withText("Войти"));
     private final SelenideElement buttonLogin = $("button svg.lucide-user").parent();
+
     // --- Burger menu items ---
     private final SelenideElement burgerHome = $("a[href='/']");
     private final SelenideElement burgerHeroes = $("a[href='/heroes']");
-    private final SelenideElement burgerJointPurchases = $("a[href='/joint-purchases']");
 
     // --- About modal ---
     private final SelenideElement aboutModal = $("div.fixed.inset-0.z-\\[70\\]");
@@ -50,7 +49,6 @@ public class MainPage {
     private final SelenideElement eventsLink = $("a[href='/events']");
     private final SelenideElement chestsLink = $("a[href='/chests']");
     private final SelenideElement allianceLink = $("a[href='/alliance']");
-    private final SelenideElement jointPurchasesLink = $("a[href='/joint-purchases']");
 
     // --- Publications ---
     private final SelenideElement publicationsTitle = $("h2");
@@ -97,10 +95,6 @@ public class MainPage {
 
     public SelenideElement getBurgerHeroes() {
         return burgerHeroes;
-    }
-
-    public SelenideElement getBurgerJointPurchases() {
-        return burgerJointPurchases;
     }
 
     // --- About modal getters ---
@@ -196,10 +190,6 @@ public class MainPage {
 
     public SelenideElement getAllianceLink() {
         return allianceLink;
-    }
-
-    public SelenideElement getJointPurchasesLink() {
-        return jointPurchasesLink;
     }
 
     // --- Publications getters ---

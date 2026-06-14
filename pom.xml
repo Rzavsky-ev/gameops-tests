@@ -12,10 +12,13 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <selenide.version>7.8.0</selenide.version>
+        <selenide.version>7.9.1</selenide.version>
         <junit.version>5.11.4</junit.version>
         <assertj-core.version>3.27.7</assertj-core.version>
         <allure.version>2.24.0</allure.version>
+        <rest-assured.version>5.4.0</rest-assured.version>
+        <jackson-databind.version>2.19.2</jackson-databind.version>
+        <jackson-datatype-jsr310.version>2.18.3</jackson-datatype-jsr310.version>
     </properties>
 
     <dependencies>
@@ -51,6 +54,27 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-selenide</artifactId>
             <version>${allure.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson-datatype-jsr310.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
