@@ -32,6 +32,16 @@ public class ApiEndpoints {
      */
     public static final String HEROES_FILTERS = HEROES_BASE + "/filters";
 
+    /**
+     * GET — список героев для тренера
+     */
+    public static final String HERO_COACH = "/api/v1/public/hero-coach";
+
+    /**
+     * GET — прогноз тренера героев
+     */
+    public static final String HERO_COACH_FORECAST = HERO_COACH + "/forecast";
+
     private ApiEndpoints() {
         throw new UtilityClassException(getClass());
     }

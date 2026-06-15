@@ -1,4 +1,4 @@
-package api.mainService.dto;
+package api.mainService.dto.heroPublicController;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

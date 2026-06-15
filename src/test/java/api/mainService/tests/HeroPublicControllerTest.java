@@ -1,6 +1,6 @@
 package api.mainService.tests;
 
-import api.mainService.dto.*;
+import api.mainService.dto.heroPublicController.*;
 import api.mainService.specs.RequestSpec;
 import api.mainService.utils.ApiEndpoints;
 import api.mainService.utils.HeroApiHelper;
@@ -21,9 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Epic("GameOps Platform")
 @Feature("Public Heroes API")
 @DisplayName("API-тесты публичных эндпоинтов героев")
-public class HeroPublicApiTest {
-
-    private static final String RESPONSE_TYPE = "application/json";
+public class HeroPublicControllerTest {
 
     // --- GET /heroes/names ---
 
@@ -90,7 +88,7 @@ public class HeroPublicApiTest {
     @Tag("regression")
     void getHeroesBatchEmptyBodyShouldReturn400() {
         Allure.step("Отправить запрос без тела", () -> {
-            Allure.addAttachment("Request Body", RESPONSE_TYPE, HeroBatchBody.EMPTY_BODY);
+            Allure.addAttachment(HeroApiHelper.REQUEST_ATTACHMENT, HeroApiHelper.RESPONSE_TYPE, HeroBatchBody.EMPTY_BODY);
 
             Response response = given()
                     .spec(RequestSpec.jsonRequestSpec())
@@ -102,8 +100,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
         });
     }
 
@@ -114,7 +112,8 @@ public class HeroPublicApiTest {
     @Tag("regression")
     void getHeroesBatchWithoutContentTypeShouldReturn415() {
         Allure.step("Отправить запрос без Content-Type", () -> {
-            Allure.addAttachment("Request Body", RESPONSE_TYPE, HeroBatchBody.SINGLE_ID);
+            Allure.addAttachment(HeroApiHelper.REQUEST_ATTACHMENT,
+                    HeroApiHelper.RESPONSE_TYPE, HeroBatchBody.SINGLE_ID);
 
             Response response = given()
                     .spec(RequestSpec.baseSpec())
@@ -126,8 +125,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
         });
     }
 
@@ -154,7 +153,8 @@ public class HeroPublicApiTest {
     @Tag("regression")
     void getHeroesBatchEmptyIdsShouldReturn400() {
         Allure.step("Отправить запрос с пустым списком heroIds", () -> {
-            Allure.addAttachment("Request Body", RESPONSE_TYPE, HeroBatchBody.EMPTY_IDS);
+            Allure.addAttachment(HeroApiHelper.REQUEST_ATTACHMENT,
+                    HeroApiHelper.RESPONSE_TYPE, HeroBatchBody.EMPTY_IDS);
 
             Response response = given()
                     .spec(RequestSpec.jsonRequestSpec())
@@ -166,8 +166,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
         });
     }
 
@@ -194,8 +194,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
 
             List<HeroLookupResponseDto> heroes = response.jsonPath().getList(".", HeroLookupResponseDto.class);
 
@@ -231,8 +231,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
 
             List<HeroLookupResponseDto> heroes = response.jsonPath().getList(".", HeroLookupResponseDto.class);
 
@@ -260,8 +260,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
         });
     }
 
@@ -281,8 +281,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
         });
     }
 
@@ -303,8 +303,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
 
             List<HeroLookupResponseDto> heroes = response.jsonPath().getList(".", HeroLookupResponseDto.class);
 
@@ -332,8 +332,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
 
             HeroCatalogFiltersResponseDto filters = response.as(HeroCatalogFiltersResponseDto.class);
 
@@ -382,8 +382,8 @@ public class HeroPublicApiTest {
                         .extract()
                         .response();
 
-                Allure.addAttachment("Response " + response.statusCode(),
-                        RESPONSE_TYPE, response.asPrettyString());
+                Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                        HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
 
                 HeroDetailsResponseDto hero = response.as(HeroDetailsResponseDto.class);
 
@@ -415,8 +415,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
         });
     }
 
@@ -434,7 +434,7 @@ public class HeroPublicApiTest {
             String slug = names.get(0).slug();
 
             Allure.step("Рассчитать статы", () -> {
-                Allure.addAttachment("Request Body", RESPONSE_TYPE, HeroStatsBody.VALID);
+                Allure.addAttachment("Request Body", HeroApiHelper.RESPONSE_TYPE, HeroStatsBody.VALID);
 
                 Response response = given()
                         .spec(RequestSpec.jsonRequestSpec())
@@ -446,8 +446,8 @@ public class HeroPublicApiTest {
                         .extract()
                         .response();
 
-                Allure.addAttachment("Response " + response.statusCode(),
-                        RESPONSE_TYPE, response.asPrettyString());
+                Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                        HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
 
                 HeroStatCalculationResponseDto stats = response.as(HeroStatCalculationResponseDto.class);
 
@@ -468,7 +468,7 @@ public class HeroPublicApiTest {
     @Tag("regression")
     void calculateStatsInvalidStageCodeShouldReturn400() {
         Allure.step("Рассчитать статы с неверным stageCode", () -> {
-            Allure.addAttachment("Request Body", RESPONSE_TYPE, HeroStatsBody.INVALID_STAGE_CODE);
+            Allure.addAttachment(HeroApiHelper.REQUEST_ATTACHMENT, HeroApiHelper.RESPONSE_TYPE, HeroStatsBody.INVALID_STAGE_CODE);
 
             Response response = given()
                     .spec(RequestSpec.jsonRequestSpec())
@@ -480,8 +480,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
         });
     }
 
@@ -492,7 +492,7 @@ public class HeroPublicApiTest {
     @Tag("regression")
     void calculateStatsNonExistentSlugShouldReturn404() {
         Allure.step("Рассчитать статы для несуществующего героя", () -> {
-            Allure.addAttachment("Request Body", RESPONSE_TYPE, HeroStatsBody.VALID);
+            Allure.addAttachment(HeroApiHelper.REQUEST_ATTACHMENT, HeroApiHelper.RESPONSE_TYPE, HeroStatsBody.VALID);
 
             Response response = given()
                     .spec(RequestSpec.jsonRequestSpec())
@@ -504,8 +504,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
         });
     }
 
@@ -525,8 +525,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
         });
     }
 
@@ -550,8 +550,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
 
             HeroPageResponseDto page = response.as(HeroPageResponseDto.class);
 
@@ -585,8 +585,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
         });
     }
 
@@ -609,8 +609,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
         });
     }
 
@@ -632,8 +632,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
         });
     }
 
@@ -660,8 +660,8 @@ public class HeroPublicApiTest {
                         .extract()
                         .response();
 
-                Allure.addAttachment("Response " + response.statusCode(),
-                        RESPONSE_TYPE, response.asPrettyString());
+                Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                        HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
 
                 HeroVariantsResponseDto variants = response.as(HeroVariantsResponseDto.class);
 
@@ -689,8 +689,8 @@ public class HeroPublicApiTest {
                     .extract()
                     .response();
 
-            Allure.addAttachment("Response " + response.statusCode(),
-                    RESPONSE_TYPE, response.asPrettyString());
+            Allure.addAttachment(HeroApiHelper.RESPONSE_PREFIX + response.statusCode(),
+                    HeroApiHelper.RESPONSE_TYPE, response.asPrettyString());
         });
     }
 }

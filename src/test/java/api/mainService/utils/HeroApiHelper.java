@@ -1,7 +1,9 @@
 package api.mainService.utils;
 
-import api.mainService.dto.HeroCardResponseDto;
-import api.mainService.dto.HeroLookupResponseDto;
+import api.mainService.dto.heroCoachPublicController.HeroCoachForecastResponseDto;
+import api.mainService.dto.heroCoachPublicController.HeroCoachPageResponseDto;
+import api.mainService.dto.heroPublicController.HeroCardResponseDto;
+import api.mainService.dto.heroPublicController.HeroLookupResponseDto;
 import api.mainService.specs.RequestSpec;
 import exceptions.UtilityClassException;
 import io.qameta.allure.Allure;
@@ -16,9 +18,9 @@ import static io.restassured.RestAssured.given;
  */
 public class HeroApiHelper {
 
-    private static final String REQUEST_ATTACHMENT = "Request Body";
-    private static final String RESPONSE_PREFIX = "Response ";
-    private static final String RESPONSE_TYPE = "application/json";
+    public static final String REQUEST_ATTACHMENT = "Request Body";
+    public static final String RESPONSE_PREFIX = "Response ";
+    public static final String RESPONSE_TYPE = "application/json";
 
     private HeroApiHelper() {
         throw new UtilityClassException(getClass());
@@ -66,5 +68,65 @@ public class HeroApiHelper {
                 response.asPrettyString());
 
         return response.jsonPath().getList(".", HeroCardResponseDto.class);
+    }
+
+    /**
+     * Получает список героев, доступных для тренера.
+     *
+     * @param page номер страницы
+     * @param size размер страницы
+     * @return DTO с пагинированным списком героев
+     */
+    public static HeroCoachPageResponseDto fetchHeroCoachPage(int page, int size) {
+        Response response = given()
+                .spec(RequestSpec.baseSpec())
+                .queryParam("page", page)
+                .queryParam("size", size)
+                .when()
+                .get(ApiEndpoints.HERO_COACH)
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
+
+        Allure.addAttachment(RESPONSE_PREFIX + response.statusCode(),
+                RESPONSE_TYPE, response.asPrettyString());
+
+        return response.as(HeroCoachPageResponseDto.class);
+    }
+
+    /**
+     * Получает прогноз тренера героев с указанием даты предыдущего события.
+     *
+     * @param targetDate        целевая дата прогноза (обязательно)
+     * @param previousEventDate дата предыдущего события (опционально)
+     * @return DTO с прогнозом
+     */
+    public static HeroCoachForecastResponseDto fetchHeroCoachForecast(String targetDate, String previousEventDate) {
+        Response response = given()
+                .spec(RequestSpec.baseSpec())
+                .queryParam("targetDate", targetDate)
+                .queryParam("previousEventDate", previousEventDate)
+                .when()
+                .get(ApiEndpoints.HERO_COACH_FORECAST)
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
+
+        Allure.addAttachment(RESPONSE_PREFIX + response.statusCode(),
+                RESPONSE_TYPE, response.asPrettyString());
+
+        return response.as(HeroCoachForecastResponseDto.class);
+    }
+
+    /**
+     * Получает прогноз тренера героев без даты предыдущего события.
+     *
+     * @param targetDate целевая дата прогноза
+     * @return DTO с прогнозом
+     */
+    public static HeroCoachForecastResponseDto fetchHeroCoachForecast(String targetDate) {
+        return fetchHeroCoachForecast(targetDate, null);
     }
 }
